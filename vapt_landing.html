@@ -1126,9 +1126,9 @@
         </div>
         <div class="mbody">
           <div class="mmetrics">
-            <div class="mmet"><div class="mmet-l">Economia total</div><div class="mmet-v" id="mv1">R$0</div><div class="mmet-c">↑ 12% este mês</div></div>
-            <div class="mmet"><div class="mmet-l">Agentes ativos</div><div class="mmet-v" id="mv2">0</div><div class="mmet-c">↑ 24/7 online</div></div>
-            <div class="mmet"><div class="mmet-l">Eficiência</div><div class="mmet-v" id="mv3">0%</div><div class="mmet-c">↑ vs. antes</div></div>
+            <div class="mmet"><div class="mmet-l">Agentes ativos</div><div class="mmet-v" id="mv1">0</div><div class="mmet-c">↑ 24/7 online</div></div>
+            <div class="mmet"><div class="mmet-l">Eficiência</div><div class="mmet-v" id="mv2">0%</div><div class="mmet-c">↑ vs. antes</div></div>
+            <div class="mmet"><div class="mmet-l">Respostas hoje</div><div class="mmet-v" id="mv3">0</div><div class="mmet-c">↑ em tempo real</div></div>
           </div>
 
           <div class="mchart">
@@ -1847,9 +1847,9 @@
       }
       requestAnimationFrame(tick);
     }
-    setTimeout(() => countTo(document.getElementById('mv1'), 21, 'R$', 'M', 1800), 300);
-    setTimeout(() => countTo(document.getElementById('mv2'), 847, '', '', 1600), 400);
-    setTimeout(() => countTo(document.getElementById('mv3'), 80, '+', '%', 1400), 500);
+    setTimeout(() => countTo(document.getElementById('mv1'), 109, '', '', 1600), 300);
+    setTimeout(() => countTo(document.getElementById('mv2'), 80, '+', '%', 1400), 400);
+    setTimeout(() => countTo(document.getElementById('mv3'), 847, '', '', 1800), 500);
 
     // 2. Chart growing
     const line = document.getElementById('chartLine');
