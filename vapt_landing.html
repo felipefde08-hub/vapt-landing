@@ -71,6 +71,18 @@
     }
     .btn-nav:hover { background: var(--blue-l); box-shadow: 0 4px 18px rgba(21,46,255,.4); transform: translateY(-1px); }
 
+    /* ── BG TEXT ── */
+    .bg-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28vw; font-weight: 100; letter-spacing: -.04em;
+      color: var(--blue); opacity: .04;
+      pointer-events: none; user-select: none;
+      white-space: nowrap; z-index: 0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+    }
+
     /* ── HERO 3D CANVAS ── */
     #hero3d {
       position: absolute; top: 0; left: 0;
@@ -1105,6 +1117,7 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <div class="hero-wrap">
+  <div class="bg-text">VAPT</div>
   <canvas id="hero3d"></canvas>
   <div class="hero-inner">
 
