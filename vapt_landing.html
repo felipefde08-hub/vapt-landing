@@ -72,9 +72,14 @@
     .btn-nav:hover { background: var(--blue-l); box-shadow: 0 4px 18px rgba(21,46,255,.4); transform: translateY(-1px); }
 
     /* ── BG TEXT ── */
+    @keyframes floatText {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(-18px); }
+    }
     .bg-text {
       position: absolute; top: 62px; left: 50%;
       transform: translateX(-50%);
+      animation: floatText 6s ease-in-out infinite;
       font-size: 28vw; font-weight: 100; letter-spacing: -.04em;
       color: var(--blue); opacity: .04;
       pointer-events: none; user-select: none;
