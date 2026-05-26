@@ -70,6 +70,8 @@
       display: inline-flex; align-items: center;
     }
     .btn-nav:hover { background: var(--blue-l); box-shadow: 0 4px 18px rgba(21,46,255,.4); transform: translateY(-1px); }
+    .nav-mobile-actions { display: none; align-items: center; gap: .45rem; }
+    .btn-nav-m { display: none; }
 
     /* ── BG TEXT ── */
     @keyframes floatText {
@@ -1010,7 +1012,11 @@
       .pq-card{grid-template-columns:1fr;gap:1rem;}
     }
     @media(max-width:600px){
+      nav{padding:0 16px;}
       .nav-links{display:none;}
+      .nav-mobile-actions{display:flex;}
+      .btn-nav-m{display:inline-flex;font-size:.74rem;padding:0 .85rem;height:32px;}
+      .btn-nav-leads{background:#0d1117;}
       footer{flex-direction:column;text-align:center;}
       .proof-bar{grid-template-columns:1fr 1fr;}
     }
@@ -1029,7 +1035,12 @@
     <a href="#pra-quem">Pra quem</a>
     <a href="#servicos">Soluções</a>
     <a href="#processo">Processo</a>
+    <a href="admin.html">Leads</a>
     <button class="btn-nav" id="navFormBtn">Agendar diagnóstico</button>
+  </div>
+  <div class="nav-mobile-actions">
+    <a href="admin.html" class="btn-nav btn-nav-m btn-nav-leads">Leads</a>
+    <a href="#cta" class="btn-nav btn-nav-m">Diagnóstico</a>
   </div>
 </nav>
 
@@ -2027,7 +2038,7 @@
 
   // ── SUPABASE ──
   const sb = supabase.createClient(
-    'https://xudidufzbiiizphtoquh.supabase.co',
+    'https://xudidufzbiiizphtoqwh.supabase.co',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1ZGlkdWZ6YmlpaXpwaHRvcXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMDYzNjEsImV4cCI6MjA5NDc4MjM2MX0.JLz9lKMuyy1mvFwXun_QE0vhROj8_dxhjfa61nkAYI8'
   );
 
@@ -2041,7 +2052,18 @@
       usa_ia:   data.usa_ia  || null,
       origem
     }]);
-    if (error) console.error('Supabase erro:', error.message);
+    if (error) throw error;
+  }
+
+  function showFormError(form, message) {
+    let errorEl = form.querySelector('.form-error');
+    if (!errorEl) {
+      errorEl = document.createElement('p');
+      errorEl.className = 'form-error';
+      errorEl.style.cssText = 'grid-column:1/-1;margin-top:.75rem;color:#ef4444;font-size:.82rem;text-align:center;';
+      form.appendChild(errorEl);
+    }
+    errorEl.textContent = message;
   }
 
   function handleForm(form, successEl, hideEl, origem) {
@@ -2066,9 +2088,17 @@
       if (!valid) return;
 
       const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
 
-      await submitLead(form, origem);
+      try {
+        await submitLead(form, origem);
+      } catch (error) {
+        console.error('Supabase erro:', error.message);
+        showFormError(form, `Nao foi possivel salvar no Supabase: ${error.message}`);
+        if (btn) { btn.disabled = false; btn.textContent = originalText; }
+        return;
+      }
 
       (hideEl || form).style.display = 'none';
       if (successEl) successEl.style.display = 'flex';

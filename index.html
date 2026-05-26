@@ -70,6 +70,7 @@
       display: inline-flex; align-items: center;
     }
     .btn-nav:hover { background: var(--blue-l); box-shadow: 0 4px 18px rgba(21,46,255,.4); transform: translateY(-1px); }
+    .nav-mobile-actions { display: none; align-items: center; gap: .45rem; }
 
     /* ── BG TEXT ── */
     @keyframes floatText {
@@ -747,7 +748,7 @@
       font-size: clamp(1.6rem, 2.2vw, 2.6rem);
       letter-spacing: -.05em; line-height: 1.2; margin-bottom: .6rem;
     }
-    .ssub { font-size: .875rem; color: rgba(13,17,23,.48); line-height: 1.68; }
+    .ssub { font-size: .875rem; color: var(--text2); line-height: 1.68; }
     .slabel { font-size: .63rem; letter-spacing: .14em; color: var(--blue); opacity: .85; }
 
     /* — proof bar — */
@@ -999,6 +1000,9 @@
       .hero-wrap { padding: 90px max(8%,60px) 50px; }
     }
 
+    /* ── MOBILE NAV BUTTON ── */
+    .btn-nav-m { display: none; }
+
     /* ── RESPONSIVE ── */
     @media(max-width:960px){
       .hero-inner{grid-template-columns:1fr;}
@@ -1008,14 +1012,85 @@
       .tl-grid{grid-template-columns:repeat(2,1fr);}
       .tl-grid::before{display:none;}
       .pq-card{grid-template-columns:1fr;gap:1rem;}
+
+      .hero-wrap        { padding-top: 64px; }
+      .hero-sub         { max-width: 100%; }
+      .w, .w2           { padding-top: 56px; padding-bottom: 56px; }
+      .nav-panel-inner  { grid-template-columns: 1fr 1fr 1fr; }
+      .nav-panel.open   { max-height: 260px; }
+      .nav-panel-submit { grid-column: 1 / -1; }
     }
-    @media(max-width:600px){
-      .nav-links{display:none;}
-      footer{flex-direction:column;text-align:center;}
-      .proof-bar{grid-template-columns:1fr 1fr;}
-    }
+
     @media(max-width:760px){
       #cta > div { grid-template-columns: 1fr !important; }
+      .hero-btns              { flex-direction: column; }
+      .hero-btns .btn-p,
+      .hero-btns .btn-g       { width: 100%; justify-content: center; }
+      .tl-step-title          { font-size: 1.2rem; }
+      .tl-slide-card          { padding: 1.5rem; gap: 1.5rem; }
+      #cta                    { padding: 56px max(4%,20px) 72px !important; }
+    }
+
+    @media(max-width:600px){
+      nav                     { padding: 0 16px; }
+      .nav-links              { display: none; }
+      .nav-mobile-actions     { display: flex; }
+      .btn-nav-m              { display: inline-flex; font-size: .74rem; padding: 0 .85rem; height: 32px; }
+      .btn-nav-leads          { background: #0d1117; }
+
+      .hero-wrap              { padding: 52px 16px 40px; min-height: auto; }
+      .hero h1                { font-size: clamp(1.75rem, 8.5vw, 2.4rem); }
+      .hero-sub               { font-size: .84rem; }
+      .hero-badge             { font-size: .64rem; }
+      .hero-btns .btn-p,
+      .hero-btns .btn-g       { height: 50px; font-size: .88rem; }
+
+      .w, .w2                 { padding: 48px 16px; }
+      .proof-wrap             { padding: 0 16px 48px; }
+      .sh                     { margin-bottom: 1.75rem; }
+
+      .proof-bar              { padding: 1rem 1.25rem; gap: .5rem; }
+      .proof-val              { font-size: 1.3rem; }
+      .proof-label            { font-size: .65rem; }
+
+      .trust-inner            { gap: 1rem; }
+      .trust-dot              { display: none; }
+      .trust-item             { font-size: .7rem; }
+
+      .pq-card                { padding: 1.25rem 1rem; }
+      .pq-val                 { font-size: .86rem; }
+
+      .srv-card               { padding: 1.4rem; }
+
+      .tl-btn-num             { width: 38px; height: 38px; font-size: .78rem; }
+
+      .nav-panel-inner        { grid-template-columns: 1fr 1fr; gap: .6rem; padding: 1.25rem 16px; }
+      .nav-panel.open         { max-height: 420px; }
+
+      .faq-q                  { font-size: .86rem; padding: 1rem 1.1rem; }
+      .faq-item.open .faq-a   { max-height: 360px; }
+
+      .cta-card               { padding: 2rem 1.5rem; }
+      .cta-t                  { font-size: 1.4rem; }
+      #cta                    { padding: 48px 16px 64px !important; }
+
+      footer                  { flex-direction: column; text-align: center; padding: 1.5rem 16px; }
+      .flinks                 { gap: 1rem; justify-content: center; }
+
+      .wa-float               { right: 14px; bottom: 14px; font-size: .78rem; padding: .6rem .95rem .6rem .75rem; }
+    }
+
+    @media(max-width:480px){
+      .hero h1                { font-size: 1.72rem; }
+      .stitle                 { font-size: 1.45rem; }
+      .proof-bar              { padding: .9rem 1rem; }
+      .proof-val              { font-size: 1.2rem; }
+      .form-grid              { grid-template-columns: 1fr !important; }
+      .nav-panel-inner        { grid-template-columns: 1fr; }
+      .nav-panel.open         { max-height: 520px; }
+      .cta-card               { padding: 1.75rem 1.25rem; }
+      .trust-inner            { gap: .7rem; }
+      .tl-slide-card          { padding: 1.25rem 1rem; }
     }
   </style>
 </head>
@@ -1029,7 +1104,12 @@
     <a href="#pra-quem">Pra quem</a>
     <a href="#servicos">Soluções</a>
     <a href="#processo">Processo</a>
+    <a href="admin.html">Leads</a>
     <button class="btn-nav" id="navFormBtn">Agendar diagnóstico</button>
+  </div>
+  <div class="nav-mobile-actions">
+    <a href="admin.html" class="btn-nav btn-nav-m btn-nav-leads">Leads</a>
+    <a href="#cta" class="btn-nav btn-nav-m">Diagnóstico</a>
   </div>
 </nav>
 
@@ -1130,7 +1210,7 @@
     <div class="hero-left r">
       <div class="hero-badge"><span class="bdot"></span>IA aplicada a negócios reais</div>
 
-      <h1>A IA entra na sua operação e <em>trabalha por você</em></h1>
+      <h1>A IA entra na sua operação e <em>trabalha com você</em></h1>
 
       <p class="hero-sub">A VAPT mapeia o seu negócio, implementa a solução certa — bot, agente, automação ou sistema — e faz funcionar em até 6 semanas.</p>
 
@@ -2027,7 +2107,7 @@
 
   // ── SUPABASE ──
   const sb = supabase.createClient(
-    'https://xudidufzbiiizphtoquh.supabase.co',
+    'https://xudidufzbiiizphtoqwh.supabase.co',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1ZGlkdWZ6YmlpaXpwaHRvcXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMDYzNjEsImV4cCI6MjA5NDc4MjM2MX0.JLz9lKMuyy1mvFwXun_QE0vhROj8_dxhjfa61nkAYI8'
   );
 
@@ -2041,7 +2121,18 @@
       usa_ia:   data.usa_ia  || null,
       origem
     }]);
-    if (error) console.error('Supabase erro:', error.message);
+    if (error) throw error;
+  }
+
+  function showFormError(form, message) {
+    let errorEl = form.querySelector('.form-error');
+    if (!errorEl) {
+      errorEl = document.createElement('p');
+      errorEl.className = 'form-error';
+      errorEl.style.cssText = 'grid-column:1/-1;margin-top:.75rem;color:#ef4444;font-size:.82rem;text-align:center;';
+      form.appendChild(errorEl);
+    }
+    errorEl.textContent = message;
   }
 
   function handleForm(form, successEl, hideEl, origem) {
@@ -2066,9 +2157,17 @@
       if (!valid) return;
 
       const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
 
-      await submitLead(form, origem);
+      try {
+        await submitLead(form, origem);
+      } catch (error) {
+        console.error('Supabase erro:', error.message);
+        showFormError(form, `Nao foi possivel salvar no Supabase: ${error.message}`);
+        if (btn) { btn.disabled = false; btn.textContent = originalText; }
+        return;
+      }
 
       (hideEl || form).style.display = 'none';
       if (successEl) successEl.style.display = 'flex';
